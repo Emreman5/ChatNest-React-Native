@@ -35,7 +35,6 @@ const FriendsScreen = () => {
     }
   };
 
-  console.log(friendRequests);
   return (
     <View style={{ padding: 10, marginHorizontal: 12 }}>
       {friendRequests.length > 0 && <Text>Arkadaş İstekleri</Text>}
