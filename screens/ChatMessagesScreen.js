@@ -37,6 +37,16 @@ const ChatMessagesScreen = () => {
     scrollToBottom()
   },[]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log(1);
+      fetchMessages();
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+
   const scrollToBottom = () => {
       if(scrollViewRef.current){
           scrollViewRef.current.scrollToEnd({animated:false})
@@ -50,8 +60,6 @@ const ChatMessagesScreen = () => {
   const handleEmojiPress = () => {
     setShowEmojiSelector(!showEmojiSelector);
   };
-
-
 
   const fetchMessages = async () => {
     try {
