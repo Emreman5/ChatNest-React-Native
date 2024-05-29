@@ -39,10 +39,9 @@ const UserChat = ({ item }) => {
     return userMessages[n - 1];
   };
   const lastMessage = getLastMessage();
-  console.log(lastMessage);
   const formatTime = (time) => {
     const options = { hour: "numeric", minute: "numeric" };
-    return new Date(time).toLocaleString("en-US", options);
+    return new Date(time).toLocaleString("tr-TR", options);
   };
   return (
     <Pressable
