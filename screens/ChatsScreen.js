@@ -9,8 +9,10 @@ const ChatsScreen = () => {
   const [acceptedFriends, setAcceptedFriends] = useState([]);
   const { userId, setUserId } = useContext(UserType);
   const navigation = useNavigation();
+
+
   useEffect(() => {
-    const acceptedFriendsList = async () => {
+    const interval =  setInterval( async () => {
       try {
         const response = await fetch(
           `http://93.177.102.168:5001/accepted-friends/${userId}`
@@ -23,6 +25,14 @@ const ChatsScreen = () => {
       } catch (error) {
         console.log("error showing the accepted friends", error);
       }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const acceptedFriendsList = async () => {
+     
     };
 
     acceptedFriendsList();
