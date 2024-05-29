@@ -113,7 +113,6 @@ const ChatMessagesScreen = () => {
         formData.append("messageType", "text");
         formData.append("messageText", message);
       }
-      console.log(formData)
       const response = await fetch("http://93.177.102.168:5001/messages", {
         method: "POST",
         body: formData,

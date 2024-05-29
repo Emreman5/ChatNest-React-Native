@@ -27,7 +27,7 @@ const RegisterScreen = () => {
     axios
       .post("http://93.177.102.168:5001/register", user)
       .then((response) => {
-        console.log(response);
+
         Alert.alert(
           "Kayıt Başarılı",
           "Başarılı Bir Şekilde Kayıt Oldunuz"

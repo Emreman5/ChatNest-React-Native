@@ -27,7 +27,6 @@ const UserChat = ({ item }) => {
   useEffect(() => {
     fetchMessages();
   }, []);
-  console.log(messages);
 
   const getLastMessage = () => {
     const userMessages = messages.filter(

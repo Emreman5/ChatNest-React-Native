@@ -64,8 +64,6 @@ const User = ({ item }) => {
       console.log("error message", error);
     }
   };
-  console.log("friend requests sent", friendRequests);
-  console.log("user friends", userFriends);
   return (
     <Pressable
       style={{ flexDirection: "row", alignItems: "center", marginVertical: 10 }}
