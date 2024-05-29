@@ -13,13 +13,6 @@ const HomeScreen = () => {
   const { userId, setUserId } = useContext(UserType);
   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      fetchUsers();
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
   
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -37,7 +30,7 @@ const HomeScreen = () => {
         <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
           <Ionicons onPress={() => navigation.navigate("Sohbetler")} name="chatbox-ellipses-outline" size={24} color="black" />
           <MaterialIcons
-            onPress={() => navigation.navigate("Arkadaşlar İstekleri")}
+            onPress={() => navigation.navigate("Arkadaş İstekleri")}
             name="people-outline"
             size={24}
             color="black"
@@ -47,25 +40,33 @@ const HomeScreen = () => {
     });
   }, []);
 
+
+  
   useEffect(() => {
-    const fetchUsers = async () => {
-      const token = await AsyncStorage.getItem("authToken");
-      const decodedToken = jwtDecode(token);
-      const userId = decodedToken.userId;
-      setUserId(userId);
+    const interval = setInterval(() => {
+      const fetchUsers = async () => {
+        const token = await AsyncStorage.getItem("authToken");
+        const decodedToken = jwtDecode(token);
+        const userId = decodedToken.userId;
+        setUserId(userId);
+  
+        axios
+          .get(`http://93.177.102.168:5001/users/${userId}`)
+          .then((response) => {
+            setUsers(response.data);
+          })
+          .catch((error) => {
+            console.log("error retrieving users", error);
+          });
+      };
+  
+      fetchUsers();
+    
+    }, 1000);
 
-      axios
-        .get(`http://93.177.102.168:5001/users/${userId}`)
-        .then((response) => {
-          setUsers(response.data);
-        })
-        .catch((error) => {
-          console.log("error retrieving users", error);
-        });
-    };
-
-    fetchUsers();
+    return () => clearInterval(interval);
   }, []);
+  
   
   const handleLogout = async () => {
     await AsyncStorage.removeItem('authToken');
