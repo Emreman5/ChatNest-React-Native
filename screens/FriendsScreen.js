@@ -8,7 +8,11 @@ const FriendsScreen = () => {
   const { userId, setUserId } = useContext(UserType);
   const [friendRequests, setFriendRequests] = useState([]);
   useEffect(() => {
-    fetchFriendRequests();
+    const interval = setInterval(() => {
+      fetchFriendRequests();
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const fetchFriendRequests = async () => {

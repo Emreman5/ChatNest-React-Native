@@ -12,6 +12,15 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   const { userId, setUserId } = useContext(UserType);
   const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchUsers();
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+  
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: "",

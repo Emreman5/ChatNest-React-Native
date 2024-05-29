@@ -39,7 +39,6 @@ const ChatMessagesScreen = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log(1);
       fetchMessages();
     }, 1000);
 
